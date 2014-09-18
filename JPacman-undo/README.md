@@ -7,5 +7,6 @@ Developers:
 ----------------
 Jason Jang: <email>jcj83429@gmail.com</email>
 
-Josh Baker
-Stephen Tai
+Josh Baker: <email>joshuabaker2@hotmail.com</email>
+
+Stephen Tai: <email>stephen8281@hotmail.com</email>
