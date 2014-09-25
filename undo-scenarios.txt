@@ -1,0 +1,51 @@
+STORY 7 - UNDO
+As a player, I want to be able to undo a move I regret, including all ghost moves made since my last move, so that I can continue the game in the state just before my last move.
+
+Scenario 7.1 - move to empty square
+Given the game is in progress
+And the player's last move was to an empty square
+When the play undos
+Then pacman moves to the last position before the last player move
+And all ghosts move to where they were before the last player move
+And the score remains unchanged
+
+Scenario 7.2 - move to food
+Given the game is in progress
+And the player's last move was to a square occupied by food
+When the play undos
+Then pacman moves to the last position before the last player move
+And all ghosts move to where they were before the last player move
+And the score rolls back
+And the food reappears
+
+Scenario 7.3 - game over
+Given the player got killed by a ghost
+When the play undos
+Then pacman moves to the last position before the last player move
+And all ghosts move to where they were before the last player move
+And the game continues
+And the score remains unchanged
+
+Scenario 7.4 - player won
+Given the player has eaten all the food and won
+When the player undos
+Then pacman moves to the position before the last player move
+And all ghosts move to where they were before the last player move
+And the game continues
+And the score rolls back
+And the food reappears
+
+Scenario 7.5 - hitting a wall
+Given the player's last move was toward a wall
+When the player undos
+Then pacman moves to the last position before the last valid player move
+And all ghosts move to where they were before the last valid player move
+And if the last valid player move was toward a food, the food reappears and the score rolls back
+
+Scenario 7.6 - tunnel
+Given the player's last move was through a tunnel (overflow)
+When the player undos
+The player should appear on the other side of the tunnel
+And all ghosts move to where they were before the last player move
+And if the last valid player move was toward a food, the food reappears and the score rolls back
+And if the last valid player move was toward a ghost, the game continues
