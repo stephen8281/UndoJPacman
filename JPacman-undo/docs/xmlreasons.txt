@@ -1,0 +1,2 @@
+We are going to extend ButtonPanel.java class because right now, there is no button for undo.  After that, we are going to extend PacmanInteraction.java so that there is a state for undo.
+Finally, we are going to extend Game.java to include a stack which will remember pacman's location and score and ghost location.
