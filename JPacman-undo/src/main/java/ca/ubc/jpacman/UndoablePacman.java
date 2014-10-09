@@ -1,4 +1,4 @@
-package org.jpacman.undo;
+package ca.ubc.jpacman;
 
 import org.jpacman.framework.ui.MainUI;
 
