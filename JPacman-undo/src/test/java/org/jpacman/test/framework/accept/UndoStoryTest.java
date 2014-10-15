@@ -1,6 +1,7 @@
 package org.jpacman.test.framework.accept;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
 import org.jpacman.framework.model.IBoardInspector.SpriteType;
@@ -56,5 +57,51 @@ public class UndoStoryTest extends MovePlayerStoryTest {
 		assertTrue(getPlayer().isAlive());
 		assertEquals(prevTile, getPlayer().getTile());
 		assertEquals(SpriteType.GHOST, ghostTile.topSprite().getSpriteType());
+	}
+
+	@Test
+	public void test_undo_4_won() {
+		// given
+		getEngine().start();
+		getEngine().left(); // eat first food
+		getEngine().right(); // go back
+		getEngine().up(); // move next to final food
+		Tile prevTile = getPlayer().getTile();
+		getEngine().right(); // eat final food
+		Tile foodTile = getPlayer().getTile();
+		// when
+		((UndoablePacman) getUI()).undo();
+		// then
+		assertEquals(prevTile, getPlayer().getTile());
+		// game.won() calls allEaten() so we don't test it.
+		assertFalse(getUI().getGame().getPointManager().allEaten());
+		assertEquals(SpriteType.FOOD, foodTile.topSprite().getSpriteType());
+	}
+
+	@Test
+	public void test_undo_5_wall() {
+		// given
+		getEngine().start();
+		Tile prevTile = getPlayer().getTile();
+		getEngine().up();
+		getEngine().left(); // move into wall
+		// when
+		((UndoablePacman) getUI()).undo();
+		// then
+		assertEquals(prevTile, getPlayer().getTile());
+	}
+
+	@Test
+	public void test_undo_6_tunnel() {
+		// given
+		getEngine().start();
+		getEngine().up();
+		getEngine().right();
+		Tile prevTile = getPlayer().getTile();
+		getEngine().up(); // through tunnel
+		// when
+		((UndoablePacman) getUI()).undo();
+		// then
+		assertEquals(prevTile, getPlayer().getTile());
 	}
 }
