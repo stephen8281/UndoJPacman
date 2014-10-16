@@ -11,8 +11,6 @@ public class UndoableGame extends Game {
 
 	private Stack<UndoStackFrame> undoStack = new Stack<UndoStackFrame>();
 
-	// private PointManager pointManager = new PointManager();
-
 	public void movePlayer(Direction dir) {
 		undoStack.push(new UndoStackFrame(getPlayer(), getGhosts(), false));
 		super.movePlayer(dir);

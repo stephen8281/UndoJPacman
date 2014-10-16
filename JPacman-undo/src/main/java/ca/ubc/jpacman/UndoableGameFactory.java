@@ -11,4 +11,9 @@ public class UndoableGameFactory extends DefaultGameFactory {
 		theGame = new UndoableGame();
 		return theGame;
 	}
+
+	@Override
+	public Game getGame() {
+		return theGame;
+	}
 }
