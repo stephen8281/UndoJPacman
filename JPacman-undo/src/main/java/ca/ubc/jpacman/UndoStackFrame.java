@@ -19,4 +19,10 @@ public class UndoStackFrame {
 		}
 		this.ateFood = ateFood;
 	}
+
+	public String toString() {
+		StringBuilder sb = new StringBuilder();
+		sb.append("P[" + player.getX() + "," + player.getY() + "]");
+		return sb.toString();
+	}
 }

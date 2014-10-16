@@ -28,5 +28,6 @@ public class UndoablePacman extends MainUI {
 	 * Causes the game to roll back to the state before the last player move
 	 */
 	public void undo() {
+		((UndoableGame) getGame()).undo();
 	}
 }

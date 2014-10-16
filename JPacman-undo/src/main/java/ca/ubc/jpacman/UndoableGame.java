@@ -20,7 +20,6 @@ public class UndoableGame extends Game {
 			undoStack.push(new UndoStackFrame(getPlayer(), getGhosts(), currentOccupier != null
 			        && currentOccupier.getSpriteType() == SpriteType.FOOD));
 			super.movePlayer(dir);
-			System.out.println("mov");
 		}
 	}
 
@@ -30,5 +29,7 @@ public class UndoableGame extends Game {
 	public void undo() {
 		if (undoStack.empty())
 			return;
+
+		System.out.println(undoStack.pop());
 	}
 }
