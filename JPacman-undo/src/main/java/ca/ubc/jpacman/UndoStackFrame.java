@@ -22,7 +22,9 @@ public class UndoStackFrame {
 
 	public String toString() {
 		StringBuilder sb = new StringBuilder();
-		sb.append("P[" + player.getX() + "," + player.getY() + "]");
+		sb.append("P[" + player.getX() + "," + player.getY() + "] ");
+		for (Tile g : ghosts)
+			sb.append("G[" + g.getX() + "," + g.getY() + "] ");
 		return sb.toString();
 	}
 }

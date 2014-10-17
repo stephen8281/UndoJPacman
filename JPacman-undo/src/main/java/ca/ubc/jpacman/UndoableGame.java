@@ -30,6 +30,11 @@ public class UndoableGame extends Game {
 		if (undoStack.empty())
 			return;
 
-		System.out.println(undoStack.pop());
+		UndoStackFrame sf = undoStack.pop();
+
+		getPlayer().deoccupy();
+		getPlayer().occupy(sf.player);
+
+		System.out.println(sf);
 	}
 }
