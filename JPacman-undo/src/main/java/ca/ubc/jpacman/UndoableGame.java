@@ -34,6 +34,7 @@ public class UndoableGame extends Game {
 
 		getPlayer().deoccupy();
 		getPlayer().occupy(sf.player);
+		getPlayer().setDirection(sf.dir);
 
 		System.out.println(sf);
 	}
