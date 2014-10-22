@@ -3,6 +3,7 @@ package ca.ubc.jpacman;
 import java.util.Stack;
 
 import org.jpacman.framework.model.Direction;
+import org.jpacman.framework.model.Food;
 import org.jpacman.framework.model.Game;
 import org.jpacman.framework.model.IBoardInspector.SpriteType;
 import org.jpacman.framework.model.Sprite;
@@ -32,9 +33,17 @@ public class UndoableGame extends Game {
 
 		UndoStackFrame sf = undoStack.pop();
 
+		if (sf.ateFood) {
+			Tile newTile = getPlayer().getTile();
+			Food eatenFood = new Food();
+			eatenFood.occupy(newTile);
+			getPointManager().consumePointsOnBoard(getPlayer(), -1 * eatenFood.getPoints());
+		}
+
 		getPlayer().deoccupy();
 		getPlayer().occupy(sf.player);
 		getPlayer().setDirection(sf.dir);
+		getPlayer().resurrect();
 
 		System.out.println(sf);
 	}
