@@ -33,7 +33,7 @@ public class UndoableGame extends Game {
 
 		UndoStackFrame actionStackFrame = undoStack.pop();
 
-		if (actionStackFrame.ateFood) {
+		if (actionStackFrame.ateFoodLastMove) {
 			Tile newTile = getPlayer().getTile();
 			Food eatenFood = new Food();
 			eatenFood.occupy(newTile);
