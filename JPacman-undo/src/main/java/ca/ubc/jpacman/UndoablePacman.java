@@ -27,16 +27,7 @@ public class UndoablePacman extends MainUI {
 		new UndoablePacman().main();
 	}
 
-	@Override
-	protected ButtonPanelWithUndo createButtonPanel(PacmanInteraction pi) {
-		assert pi != null;
-    	if (buttonPanelWithUndo == null) {
-    		buttonPanelWithUndo = new ButtonPanelWithUndo();
-    	}
-    	return buttonPanelWithUndo
-     		.withParent(this)
-    		.withInteractor(pi);
-	}
+	
 	
 	
 	/**
