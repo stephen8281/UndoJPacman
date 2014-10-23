@@ -6,7 +6,8 @@ import org.jpacman.framework.ui.MainUI;
 public class UndoablePacman extends MainUI {
 
 	private static final long serialVersionUID = 1L;
-
+	private ButtonPanelWithUndo buttonPanelWithUndo;
+	
 	public UndoablePacman() {
 		super();
 		withFactory(new UndoableGameFactory());
