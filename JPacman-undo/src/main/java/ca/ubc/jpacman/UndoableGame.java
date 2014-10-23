@@ -1,29 +1,50 @@
 package ca.ubc.jpacman;
 
+import java.util.Stack;
+
 import org.jpacman.framework.model.Direction;
+import org.jpacman.framework.model.Food;
 import org.jpacman.framework.model.Game;
-import org.jpacman.framework.model.Ghost;
+import org.jpacman.framework.model.IBoardInspector.SpriteType;
+import org.jpacman.framework.model.Sprite;
+import org.jpacman.framework.model.Tile;
 
 public class UndoableGame extends Game {
 
-	public void undo() {
+	private Stack<UndoStackFrame> undoStack = new Stack<UndoStackFrame>();
 
-	}
-
-	/**
-	 * @right now it just calls the superclass's movePlayer method
-	 */
-	@Override
 	public void movePlayer(Direction dir) {
-		super.movePlayer(dir);
+		Tile target = getBoard().tileAtDirection(getPlayer().getTile(), dir);
+		Sprite currentOccupier = target.topSprite();
+		if ((currentOccupier == null || currentOccupier.getSpriteType() != SpriteType.WALL)
+		        && getPlayer().isAlive()) {
+			undoStack.push(new UndoStackFrame(getPlayer(), getGhosts(), currentOccupier != null
+			        && currentOccupier.getSpriteType() == SpriteType.FOOD));
+			super.movePlayer(dir);
+		}
 	}
 
 	/**
-	 * @right now it just calls the superclass's moveGhost method
+	 * Rolls back the game to the previous state
 	 */
-	@Override
-	public void moveGhost(Ghost theGhost, Direction dir) {
-		super.moveGhost(theGhost, dir);
-	}
+	public void undo() {
+		if (undoStack.empty())
+			return;
 
+		UndoStackFrame sf = undoStack.pop();
+
+		if (sf.ateFood) {
+			Tile newTile = getPlayer().getTile();
+			Food eatenFood = new Food();
+			eatenFood.occupy(newTile);
+			getPointManager().consumePointsOnBoard(getPlayer(), -1 * eatenFood.getPoints());
+		}
+
+		getPlayer().deoccupy();
+		getPlayer().occupy(sf.player);
+		getPlayer().setDirection(sf.dir);
+		getPlayer().resurrect();
+
+		System.out.println(sf);
+	}
 }

@@ -5,21 +5,16 @@ import org.jpacman.framework.model.Game;
 
 public class UndoableGameFactory extends DefaultGameFactory {
 
-	private transient Game UndoGame;
+	private transient Game theGame;
 
 	@Override
 	public Game makeGame() {
-		UndoGame = new UndoableGame();
-		return UndoGame;
+		theGame = new UndoableGame();
+		return theGame;
 	}
 
-	/**
-	 * @return The game created by this factory.
-	 */
 	@Override
-	protected Game getGame() {
-		assert UndoGame != null;
-		return UndoGame;
+	public Game getGame() {
+		return theGame;
 	}
-
 }

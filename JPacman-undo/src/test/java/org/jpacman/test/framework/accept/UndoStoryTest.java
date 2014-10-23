@@ -4,6 +4,7 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
+import org.jpacman.framework.model.Direction;
 import org.jpacman.framework.model.IBoardInspector.SpriteType;
 import org.jpacman.framework.model.Tile;
 import org.jpacman.framework.ui.MainUI;
@@ -20,12 +21,14 @@ public class UndoStoryTest extends MovePlayerStoryTest {
 	public void test_undo_1_move() {
 		// given
 		getEngine().start();
+		Direction prevDir = getPlayer().getDirection();
 		Tile prevTile = getPlayer().getTile();
 		getEngine().up();
 		// when
 		((UndoablePacman) getUI()).undo();
 		// then
 		assertEquals(prevTile, getPlayer().getTile());
+		assertEquals(prevDir, getPlayer().getDirection());
 	}
 
 	@Test
