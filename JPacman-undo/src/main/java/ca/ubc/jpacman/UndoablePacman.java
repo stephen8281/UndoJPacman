@@ -1,7 +1,9 @@
 package ca.ubc.jpacman;
 
 import org.jpacman.framework.factory.FactoryException;
+import org.jpacman.framework.ui.ButtonPanel;
 import org.jpacman.framework.ui.MainUI;
+import org.jpacman.framework.ui.PacmanInteraction;
 
 public class UndoablePacman extends MainUI {
 
@@ -25,6 +27,18 @@ public class UndoablePacman extends MainUI {
 		new UndoablePacman().main();
 	}
 
+	@Override
+	protected ButtonPanelWithUndo createButtonPanel(PacmanInteraction pi) {
+		assert pi != null;
+    	if (buttonPanelWithUndo == null) {
+    		buttonPanelWithUndo = new ButtonPanelWithUndo();
+    	}
+    	return buttonPanelWithUndo
+     		.withParent(this)
+    		.withInteractor(pi);
+	}
+	
+	
 	/**
 	 * Causes the game to roll back to the state before the last player move
 	 */
