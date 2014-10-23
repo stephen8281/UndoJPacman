@@ -31,9 +31,9 @@ public class UndoableGame extends Game {
 		if (undoStack.empty())
 			return;
 
-		UndoStackFrame sf = undoStack.pop();
+		UndoStackFrame actionStackFrame = undoStack.pop();
 
-		if (sf.ateFood) {
+		if (actionStackFrame.ateFood) {
 			Tile newTile = getPlayer().getTile();
 			Food eatenFood = new Food();
 			eatenFood.occupy(newTile);
@@ -41,10 +41,10 @@ public class UndoableGame extends Game {
 		}
 
 		getPlayer().deoccupy();
-		getPlayer().occupy(sf.player);
-		getPlayer().setDirection(sf.dir);
+		getPlayer().occupy(actionStackFrame.previousPlayerTile);
+		getPlayer().setDirection(actionStackFrame.previousPlayerDirection);
 		getPlayer().resurrect();
 
-		System.out.println(sf);
+		System.out.println(actionStackFrame);
 	}
 }
