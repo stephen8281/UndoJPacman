@@ -38,8 +38,14 @@ public class UndoableGame extends Game {
 			Food eatenFood = new Food();
 			eatenFood.occupy(newTile);
 			getPointManager().consumePointsOnBoard(getPlayer(), -1 * eatenFood.getPoints());
+
 		}
 
+		for (int i = 0; i < getGhosts().size(); i++) {
+			getGhosts().get(i).deoccupy();
+			getGhosts().get(i).occupy(actionStackFrame.previousGhostTiles.get(i));
+
+		}
 		getPlayer().deoccupy();
 		getPlayer().occupy(actionStackFrame.previousPlayerTile);
 		getPlayer().setDirection(actionStackFrame.previousPlayerDirection);
