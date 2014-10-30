@@ -45,6 +45,8 @@ public class UndoableGame extends Game {
 		getPlayer().setDirection(actionStackFrame.previousPlayerDirection);
 		getPlayer().resurrect();
 
+		notifyViewers();
+
 		System.out.println(actionStackFrame);
 	}
 
