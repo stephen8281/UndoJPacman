@@ -5,6 +5,7 @@ import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
 import org.jpacman.framework.model.Direction;
+import org.jpacman.framework.model.Ghost;
 import org.jpacman.framework.model.IBoardInspector.SpriteType;
 import org.jpacman.framework.model.Tile;
 import org.jpacman.framework.ui.MainUI;
@@ -106,5 +107,20 @@ public class UndoStoryTest extends MovePlayerStoryTest {
 		((UndoablePacman) getUI()).undo();
 		// then
 		assertEquals(prevTile, getPlayer().getTile());
+	}
+
+	@Test
+	public void test_undo_7_ghosts() {
+		// given
+		getEngine().start();
+		Ghost g = theGhost();
+		Tile prevTile = g.getTile();
+		getUI().getGame().moveGhost(g, Direction.DOWN);
+		Tile currTile = g.getTile();
+		assertFalse(prevTile == currTile);
+		// when
+		((UndoablePacman) getUI()).undo();
+		// then
+		assertEquals(prevTile, g.getTile());
 	}
 }
