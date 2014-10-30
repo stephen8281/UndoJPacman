@@ -9,10 +9,19 @@ public class UndoablePacman extends MainUI {
 
 	private static final long serialVersionUID = 1L;
 	private ButtonPanelWithUndo buttonPanelWithUndo;
-	
+
 	public UndoablePacman() {
 		super();
 		withFactory(new UndoableGameFactory());
+	}
+
+	protected ButtonPanel createButtonPanel(PacmanInteraction pi) {
+		assert (pi != null);
+		if (buttonPanelWithUndo == null) {
+			buttonPanelWithUndo = new ButtonPanelWithUndo();
+		}
+		withButtonPanel(buttonPanelWithUndo);
+		return buttonPanelWithUndo.withParent(this).withInteractor(pi);
 	}
 
 	/**
@@ -27,9 +36,6 @@ public class UndoablePacman extends MainUI {
 		new UndoablePacman().main();
 	}
 
-	
-	
-	
 	/**
 	 * Causes the game to roll back to the state before the last player move
 	 */
