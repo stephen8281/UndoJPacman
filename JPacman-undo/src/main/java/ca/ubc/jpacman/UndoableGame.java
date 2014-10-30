@@ -28,9 +28,6 @@ public class UndoableGame extends Game {
 	 * Rolls back the game to the previous state
 	 */
 	public void undo() {
-		if (undoStack.empty())
-			return;
-
 		UndoStackFrame actionStackFrame = undoStack.pop();
 
 		if (actionStackFrame.ateFoodLastMove) {

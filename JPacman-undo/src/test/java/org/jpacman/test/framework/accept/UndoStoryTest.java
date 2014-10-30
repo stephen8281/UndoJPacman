@@ -115,6 +115,7 @@ public class UndoStoryTest extends MovePlayerStoryTest {
 		getEngine().start();
 		Ghost g = theGhost();
 		Tile prevTile = g.getTile();
+		getEngine().up();
 		getUI().getGame().moveGhost(g, Direction.DOWN);
 		Tile currTile = g.getTile();
 		assertFalse(prevTile == currTile);
