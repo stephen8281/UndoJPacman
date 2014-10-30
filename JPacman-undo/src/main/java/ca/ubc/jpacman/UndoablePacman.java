@@ -21,7 +21,12 @@ public class UndoablePacman extends MainUI {
 			buttonPanelWithUndo = new ButtonPanelWithUndo();
 		}
 		withButtonPanel(buttonPanelWithUndo);
-		return buttonPanelWithUndo.withParent(this).withInteractor(pi);
+		return buttonPanelWithUndo.withUndoablePacman(this).withParent(this).withInteractor(pi);
+	}
+
+	public void main() throws FactoryException {
+		super.main();
+		((UndoableGame) getGame()).attach(buttonPanelWithUndo);
 	}
 
 	/**
@@ -41,5 +46,9 @@ public class UndoablePacman extends MainUI {
 	 */
 	public void undo() {
 		((UndoableGame) getGame()).undo();
+	}
+
+	public boolean undoAvailable() {
+		return ((UndoableGame) getGame()).undoAvailable();
 	}
 }

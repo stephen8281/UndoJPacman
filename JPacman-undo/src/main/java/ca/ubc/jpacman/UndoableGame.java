@@ -47,4 +47,8 @@ public class UndoableGame extends Game {
 
 		System.out.println(actionStackFrame);
 	}
+
+	public boolean undoAvailable() {
+		return !undoStack.empty();
+	}
 }
