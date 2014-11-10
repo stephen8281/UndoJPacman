@@ -1,0 +1,4 @@
+coverage: 95.2%
+
+ButtonPanelWithUndo's undo function and UndoablePacman's main function are not tested.
+UndoablePacman's button panel creation code isn't fully tested.
