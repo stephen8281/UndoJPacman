@@ -2,3 +2,9 @@ coverage: 95.2%
 
 ButtonPanelWithUndo's undo function and UndoablePacman's main function are not tested.
 UndoablePacman's button panel creation code isn't fully tested.
+
+Testing the undo button callback is difficult to do automatically as it has to be done by clicking the button.
+Testing the ButtonPanelWithUndo's undo function is impossible without breaking some encapsulation.
+The original jpacman-framework tests do not cover this kind of things either so we think it's ok if we don't have automated tests for them.
+
+
