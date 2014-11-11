@@ -1,10 +1,16 @@
 coverage: 95.2%
 
 ButtonPanelWithUndo's undo function and UndoablePacman's main function are not tested.
-UndoablePacman's button panel creation code isn't fully tested.
+UndoablePacman's button panel creation code and main() function aren't fully tested.
 
 Testing the undo button callback is difficult to do automatically as it has to be done by clicking the button.
 Testing the ButtonPanelWithUndo's undo function is impossible without breaking some encapsulation.
 The original jpacman-framework tests do not cover this kind of things either so we think it's ok if we don't have automated tests for them.
 
+UndoablePacman's button panel creation function is protected and all its callers respect the invariant that the PacmanInteraction passed to it is non-null so we can't easily test the assertion that the PacmanInteraction is non-null.
+We feel that this is ok because the original jpacman-framework does not test the assertion either.
 
+UndoablePacman's main function is also not tested.
+This is due to the way AbstractAcceptanceTest's setUp is written.
+Since AbstractAcceptanceTest makes heavy use of privates with insufficient accessors, changing the setUp function would require significant code and variable duplication in our extended class.
+We feel that the code smell this brings outweighs the benefits of testing the main fuction, which is nothing but a simple stub.
