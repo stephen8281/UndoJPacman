@@ -14,3 +14,10 @@ UndoablePacman's main function is also not tested.
 This is due to the way AbstractAcceptanceTest's setUp is written.
 Since AbstractAcceptanceTest makes heavy use of privates with insufficient accessors, changing the setUp function would require significant code and variable duplication in our extended class.
 We feel that the code smell this brings outweighs the benefits of testing the main fuction, which is nothing but a simple stub.
+
+
+(4) Formatting
+It is important to use a code formatting standard because it reduces the effort spent, for each developer, on getting used to another developer's coding style. Not only does code formatting increases readibility, it also avoids unnecessary merge when committing.  Having a code formatting standard in place allows us to change the code to our preference on our own branch, without affecting each other when we pull the changes.
+
+  
+
