@@ -32,9 +32,15 @@ public class ButtonPanelWithUndo extends ButtonPanel {
 			}
 		});
 		undoButton.setName("jpacman.undo");
-		// undoButton.requestFocusInWindow();
 	}
 
+	/**
+	 * Tells the UndoPacman to include this ButtonPanel
+	 * 
+	 * @param the
+	 *            UndoablePacman instance that include this ButtonPanel
+	 * @return Itself for fluency.
+	 */
 	public ButtonPanel withUndoablePacman(UndoablePacman up) {
 		this.undoableInteractor = up;
 		return this;
