@@ -14,6 +14,9 @@ public class ButtonPanelWithUndo extends ButtonPanel {
 
 	private UndoablePacman undoableInteractor;
 
+	/**
+	 * Create and add the basic buttons plus the undo button
+	 */
 	@Override
 	public void initialize() {
 		super.initialize();
@@ -23,6 +26,9 @@ public class ButtonPanelWithUndo extends ButtonPanel {
 		addButton(undoButton);
 	}
 
+	/**
+	 * Create the undo button
+	 */
 	protected void initializeUndoButton() {
 		undoButton.setEnabled(false);
 		undoButton.addActionListener(new ActionListener() {
@@ -35,22 +41,38 @@ public class ButtonPanelWithUndo extends ButtonPanel {
 		// undoButton.requestFocusInWindow();
 	}
 
+	/**
+	 * Provide the UndoablePacman to call for undo
+	 * 
+	 * @param up
+	 *            The UndoablePacman
+	 * @return Itself for fluency
+	 */
 	public ButtonPanel withUndoablePacman(UndoablePacman up) {
 		this.undoableInteractor = up;
 		return this;
 	}
 
+	/**
+	 * Enable/disable the buttons based on the game state
+	 */
 	@Override
 	public void update(Observable o, Object arg) {
 		super.update(o, arg);
 		updateUndoButton();
 	}
 
+	/**
+	 * Enable/disable the undo button based on the game state
+	 */
 	public void updateUndoButton() {
 		if (undoButton != null)
 			undoButton.setEnabled(undoableInteractor.undoAvailable());
 	}
 
+	/**
+	 * Pause the game and undo the last action.
+	 */
 	public void undo() {
 		super.pause();
 		undoableInteractor.undo();

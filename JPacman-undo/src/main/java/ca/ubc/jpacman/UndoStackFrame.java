@@ -21,6 +21,17 @@ public class UndoStackFrame {
 	public List<Tile> previousGhostTiles = new ArrayList<Tile>(); // The tiles each ghost is on
 	public boolean ateFoodLastMove; // Whether the last player action result in a food being eaten.
 
+	/**
+	 * Creates a new UndoStackFrame given the objects that contain the information needed to restore
+	 * the current game state. This should be done before executing the player move.
+	 * 
+	 * @param player
+	 *            the player
+	 * @param ghosts
+	 *            the list of ghosts
+	 * @param ateFood
+	 *            whether the player's pending move will result in food being eaten
+	 */
 	public UndoStackFrame(Player player, List<Ghost> ghosts, boolean ateFood) {
 		this.previousPlayerTile = player.getTile();
 		this.previousPlayerDirection = player.getDirection();
@@ -30,9 +41,13 @@ public class UndoStackFrame {
 		this.ateFoodLastMove = ateFood;
 	}
 
+	/**
+	 * For testing.
+	 */
 	public String toString() {
 		StringBuilder sb = new StringBuilder();
-		sb.append("P[" + previousPlayerTile.getX() + "," + previousPlayerTile.getY() + "|" + previousPlayerDirection + "] ");
+		sb.append("P[" + previousPlayerTile.getX() + "," + previousPlayerTile.getY() + "|"
+		        + previousPlayerDirection + "] ");
 		for (Tile g : previousGhostTiles)
 			sb.append("G[" + g.getX() + "," + g.getY() + "] ");
 		return sb.toString();

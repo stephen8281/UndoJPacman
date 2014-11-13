@@ -10,6 +10,9 @@ public class UndoablePacman extends MainUI {
 	private static final long serialVersionUID = 1L;
 	private ButtonPanelWithUndo buttonPanelWithUndo;
 
+	/**
+	 * Creates a new UI with undo functionality for the default board
+	 */
 	public UndoablePacman() {
 		super();
 		withFactory(new UndoableGameFactory());
@@ -24,6 +27,12 @@ public class UndoablePacman extends MainUI {
 		return buttonPanelWithUndo.withUndoablePacman(this).withParent(this).withInteractor(pi);
 	}
 
+	/**
+	 * Top level method creating the game, and starting up the interactions.
+	 * 
+	 * @throws FactoryException
+	 *             If creating the game fails.
+	 */
 	public void main() throws FactoryException {
 		super.main();
 		((UndoableGame) getGame()).attach(buttonPanelWithUndo);
@@ -48,6 +57,11 @@ public class UndoablePacman extends MainUI {
 		((UndoableGame) getGame()).undo();
 	}
 
+	/**
+	 * Checks whether undo is possible
+	 * 
+	 * @return Whether undo is possible
+	 */
 	public boolean undoAvailable() {
 		return ((UndoableGame) getGame()).undoAvailable();
 	}

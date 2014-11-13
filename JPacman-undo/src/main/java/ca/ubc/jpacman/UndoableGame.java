@@ -13,6 +13,9 @@ public class UndoableGame extends Game {
 
 	private Stack<UndoStackFrame> undoStack = new Stack<UndoStackFrame>();
 
+	/**
+	 * A proxy to record game state when the player moves.
+	 */
 	public void movePlayer(Direction dir) {
 		Tile target = getBoard().tileAtDirection(getPlayer().getTile(), dir);
 		Sprite currentOccupier = target.topSprite();
@@ -53,6 +56,11 @@ public class UndoableGame extends Game {
 		System.out.println(actionStackFrame);
 	}
 
+	/**
+	 * Checks if undo is currently possible
+	 * 
+	 * @return Whether undo is currently possible
+	 */
 	public boolean undoAvailable() {
 		return !undoStack.empty();
 	}
