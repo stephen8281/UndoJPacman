@@ -18,6 +18,14 @@ public class UndoablePacman extends MainUI {
 		withFactory(new UndoableGameFactory());
 	}
 
+	/**
+	 * Create a panel containing the start/stop/undo buttons.
+	 * 
+	 * @param pi
+	 *            Interactor capable of performing requested actions.
+	 * @return The new panel with buttons.
+	 */
+	@Override
 	protected ButtonPanel createButtonPanel(PacmanInteraction pi) {
 		assert (pi != null);
 		if (buttonPanelWithUndo == null) {
@@ -28,7 +36,8 @@ public class UndoablePacman extends MainUI {
 	}
 
 	/**
-	 * Top level method creating the game, and starting up the interactions.
+	 * Top level method creating the game, and starting up the interactions. Attach new buttonPanel
+	 * to allow it to observe game and update undo button accordingly
 	 * 
 	 * @throws FactoryException
 	 *             If creating the game fails.
