@@ -1,4 +1,4 @@
-A JAVA Jpacman game that supports undo
+A JAVA JPacman game that supports undo
 
 •	Added an undo feature to an existing Pacman-like game to allow players to undo their moves any time during the game using a test-driven development model
 
